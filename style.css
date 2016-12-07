@@ -1,0 +1,75 @@
+html, body
+{
+    height: 100%;
+    width: 100%;
+    background: black;
+    overflow: hidden;
+}
+
+.position-absolute
+{
+    position: absolute;
+}
+
+.width-100
+{
+    width: 100%;
+}
+
+.padding-0
+{
+     padding: 0;
+}
+
+.overflow-hidden
+{
+    overflow: hidden;
+}
+
+.background-black
+{
+    background: black;
+}
+
+.border-white
+{
+    border: solid 1px white;
+}
+
+.color-white
+{
+    color: white;
+}
+
+.color-red
+{
+    color: red;
+}
+
+.z-50
+{
+    z-index: 50;
+}
+
+.height-1
+{
+    height: 50%;
+}
+
+.height-2
+{
+    height: 50%;
+}
+
+.height-3
+{
+    height: 100%;
+}
+
+@media screen and (max-width: 991px)
+{
+    .height-1
+    {
+        height: 25%;
+    }
+}
