@@ -9,22 +9,26 @@
     <body>
         <div class="container-fluid row background-black">
             
-            <div class="col-xs-12 col-md-6 border-white height-1 text-justify overflow-hidden block-1 padding-0">
-                <div id="screen-1-1" class="position-absolute color-white col-xs-12 border-white background-black z-50 padding-0">
-                    Mainframe:
-                    &nbsp;<span style="color: green;">||||||</span> - <span id="green-sectors"></span>
-                    &nbsp;<span style="color: red;">||||||</span> - <span id="red-sectors"></span>
-                    &nbsp;<span style="color: blue;">||||||</span> - <span id="blue-sectors"></span>
-                    &nbsp;<span style="color: yellow;">||||||</span> - <span id="yellow-sectors"></span>
-                </div>
-                <div id="screen-1" class="position-absolute"></div>
+            <div id="screen-1" class="col-xs-12 col-md-6 border-white height-1 text-justify overflow-hidden padding-0">
+                <div id="screen-1-child" class="position-absolute"></div>
             </div>
-            <div class="col-xs-12 col-md-6 border-white height-1">
-                <p class="color-white"></p>
+            <div id="screen-2" class="col-xs-12 col-md-6 border-white height-1 text-justify overflow-hidden padding-0">
+                <div id="screen-2-child" class="position-absolute"></div>
             </div>
-            <div class="col-xs-12 border-white height-2">
-                <p class="color-white"></p>
+            <div id="screen-3" class="col-xs-12 border-white height-2 text-justify overflow-hidden padding-0">
+                <div id="screen-3-child" class="position-absolute"></div>
             </div>
+
         </div>
+
+        <!-- additional screens -->
+        <div id="mainframe-info" style="display: none;" class="position-absolute color-white col-xs-12 border-white background-black z-50 padding-0">
+            Mainframe:
+            &nbsp;<span style="color: green;">||||||</span> - <span id="green-sectors"></span>
+            &nbsp;<span style="color: red;">||||||</span> - <span id="red-sectors"></span>
+            &nbsp;<span style="color: blue;">||||||</span> - <span id="blue-sectors"></span>
+            &nbsp;<span style="color: yellow;">||||||</span> - <span id="yellow-sectors"></span>
+        </div>
+
     </body>
 </html>

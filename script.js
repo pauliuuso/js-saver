@@ -26,7 +26,7 @@ function updateScreen(Block1Cycles = 0)
 {
     random = Math.random();
 
-    updateBlock1(Block1Cycles);
+    mainframeSectors(Block1Cycles, "#screen-3");
 
     setTimeout(function()
     {
@@ -37,14 +37,23 @@ function updateScreen(Block1Cycles = 0)
 
 
 
-function updateBlock1(Block1Cycles)
+function mainframeSectors(Block1Cycles, currentScreen)
 {
+    var childDiv = currentScreen + "-child";
+
     cycles1 = Block1Cycles;
     if(cycles1 > sectorsCount)
     {
         cycles1 = 0;
-        $("#screen-1").html("");
+        $(childDiv).html("");
     }
+
+    if("#" + $("#mainframe-info").parent().attr("id") !== currentScreen)
+    {
+        $("#mainframe-info").detach().prependTo(currentScreen);
+        $("#mainframe-info").css("display", "block");
+    }
+
     $("#green-sectors").html(sectorsGreen);
     $("#red-sectors").html(sectorsRed);
     $("#blue-sectors").html(sectorsBlue);
@@ -54,35 +63,35 @@ function updateBlock1(Block1Cycles)
 
     if(random > 0 && random <= 0.94)
     {
-        $("#screen-1").append("<span style='color: green;'> |||||| </span>");
+        $(childDiv).append("<span style='color: green;'> |||||| </span>");
         sectorsGreen++;
     }
     else if(random > 0.94 && random <= 0.95)
     {
-        $("#screen-1").append("<span style='color: red;'> |||||| </span>");
+        $(childDiv).append("<span style='color: red;'> |||||| </span>");
         sectorsRed++;
     }
     else if(random > 0.95 && random <= 0.96)
     {
-        $("#screen-1").append("<span style='color: yellow;'> |||||| </span>");
+        $(childDiv).append("<span style='color: yellow;'> |||||| </span>");
         sectorsYellow++;
     }
     else if(random > 0.96 && random <= 0.97)
     {
-        $("#screen-1").append("<span style='color: blue;'> |||||| </span>");
+        $(childDiv).append("<span style='color: blue;'> |||||| </span>");
         sectorsBlue++;
     }
     else
     {
-        $("#screen-1").append("<span style='color: white;'> |||||| </span>");
+        $(childDiv).append("<span style='color: white;'> |||||| </span>");
     }
 
-    // $("#screen-1").html(currentScreen1 + currentChar);
-    if(block1height < $("#screen-1").height())
+    // $("#screen-1").html(childDiv1 + currentChar);
+    if(block1height < $(childDiv).height())
     {
-        $("#screen-1").css("top", -($("#screen-1").height() - $("#screen-1").parent().height()));
+        $(childDiv).css("top", -($(childDiv).height() - $(childDiv).parent().height()));
     }
-    block1height = $("#screen-1").height();
+    block1height = $(childDiv).height();
 }
 
 
