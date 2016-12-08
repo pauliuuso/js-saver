@@ -1,7 +1,7 @@
 $(document).ready()
 {
     // [[1]] = only once
-    var functionList = [[mainframeSectors, false], [frameColor, true]];
+    var functionList = [[mainframeSectors, false], [frameColor, true], [showSphere, true]];
     var functionsToCall = [0, 0, 0];
     var screens = ["#screen-1", "#screen-2", "#screen-3"];
 
@@ -13,8 +13,10 @@ $(document).ready()
     var sectorsRed = 0;
     var sectorsBlue = 0;
     var sectorsYellow = 0;
-    var sectorsCount = 2000;
+    var sectorsCount = 1500;
+
     var colors = ["lightcoral", "lightseagreen", "lightcyan", "white", "lightblue"];
+    var wireSpheres = ["wire_sphere_1.gif"];
 
     var cycles1 = 0;
     var nextCycle = 2000;
@@ -38,7 +40,7 @@ function updateScreen()
     {
         if(functionList[functionsToCall[a]][1] == true && cycles1 > 1)
         {
-            break;
+            continue;
         } 
         functionList[functionsToCall[a]][0](screens[a]);
     }
@@ -76,13 +78,28 @@ function clearScreens()
     }
 }
 
-function frameColor()
+function frameColor(currentScreen)
 {
-    console.log("set color");
     $(".border").each(function()
     {
         $(this).css("border", "solid 1px " + colors[Math.floor(cycleRandom * colors.length)]);
     });
+}
+
+function showSphere(currentScreen)
+{
+    var childDiv = $(currentScreen + "-child");
+    childDiv.css("top", "0");
+    var sphere = "<img class='float-left width-50' src='img/" + wireSpheres[Math.floor(Math.random() * wireSpheres.length)] + "' />";
+
+    childDiv.append($(sphere));
+    childDiv.append($(sphere));
+    // sphere.clone().prependTo(childDiv);
+    // sphere.clone().prependTo(childDiv);
+    // for(var a = childDiv.height(); a < currentScreen.height();)
+    // {
+    //     childDiv.append($(sphere));
+    // }
 }
 
 function mainframeSectors(currentScreen)
@@ -95,11 +112,11 @@ function mainframeSectors(currentScreen)
     
     if(cycles1 < sectorsCount)
     {
-        $(childDiv).css("top", -($(childDiv).height() - $(childDiv).parent().height()));
+        $(childDiv).css("top", -(block1height - $(childDiv).parent().height()));
     }
     else
     {
-        $(childDiv).css("top", -($(childDiv).height() - $(childDiv).parent().height() - 18));
+        $(childDiv).css("top", -(block1height - $(childDiv).parent().height() - 18));
     }
 
     if(cycles1 > sectorsCount)
@@ -117,8 +134,6 @@ function mainframeSectors(currentScreen)
     $("#red-sectors").html(sectorsRed);
     $("#blue-sectors").html(sectorsBlue);
     $("#yellow-sectors").html(sectorsYellow);
-
-    var currentChar = text1.charAt(cycles1);
 
     if(random > 0 && random <= 0.94)
     {
