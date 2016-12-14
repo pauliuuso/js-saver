@@ -7,19 +7,19 @@ $(document).ready()
 
     var random = 0;
     var cycleRandom = Math.random();
-    var updateInterval = 500;
+    var updateInterval = 400;
     var block1height = 0;
     var sectorsGreen = 0;
     var sectorsRed = 0;
     var sectorsBlue = 0;
     var sectorsYellow = 0;
-    var sectorsCount = 1500;
+    var sectorsCount = 1300;
 
     var colors = ["lightcoral", "lightseagreen", "lightcyan", "white", "lightblue"];
-    var wireSpheres = ["wire_sphere_1.gif"];
+    var wireSpheres = ["wire_sphere_1.gif", "wire_sphere_2.gif", "wire_sphere_3.gif", "wire_sphere_4.gif", "wire_sphere_5.gif", "wire_sphere_6.gif", "wire_sphere_7.gif", "wire_sphere_8.gif"];
 
     var cycles1 = 0;
-    var nextCycle = 2000;
+    var nextCycle = 1200;
 
     var text1 = "Donec ornare mattis facilisis. Fusce volutpat euismod augue in scelerisque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent a justo eros. Phasellus luctus lacus magna, ut aliquet magna maximus ut. Praesent neque risus, hendrerit a luctus at, viverra nec nunc. Sed mollis orci sed augue lobortis porta. Praesent efficitur aliquet lorem, ac gravida elit pharetra et. Sed ultricies tempus condimentum. Nullam lacus ipsum, accumsan vel consequat ac, tincidunt id sem. Curabitur maximus metus ac vulputate pharetra. Etiam quis nibh lacus. Phasellus sit amet purus id sapien scelerisque volutpat. In vitae ornare sem. Nulla facilisi. Aenean sollicitudin ullamcorper eros ut tempus. Ut eros eros, egestas a sem at, porttitor vulputate eros. Ut nunc urna, facilisis vel commodo quis, blandit et dolor. Sed malesuada suscipit diam in scelerisque. Fusce rutrum lectus a quam rutrum, eget facilisis felis malesuada. Curabitur aliquam placerat augue a interdum. Nam lacinia ligula sed neque ultrices vestibulum. Nam eu nulla mi. Donec hendrerit feugiat posuere. Vivamus pharetra eros lacus, nec placerat lacus mattis nec. Quisque nec elementum urna. Mauris odio diam, blandit viverra massa eget, ornare hendrerit arcu. Nullam mauris libero, pellentesque ut ipsum id, placerat vehicula dolor. Mauris efficitur fringilla sollicitudin. Sed lobortis neque eget lacus facilisis euismod. Integer semper nec libero a vehicula. Cras at sem elementum neque volutpat viverra. Curabitur vehicula lorem ut purus tincidunt, non placerat tellus interdum. Duis at libero laoreet, facilisis nisi varius, suscipit sem. Quisque convallis blandit metus. Aliquam vitae tortor urna. Donec rutrum scelerisque condimentum. In commodo tristique purus, eget euismod nisi cursus id. Integer mattis ipsum in lobortis dignissim. Aliquam vehicula finibus nisi, at faucibus dolor eleifend vel. Nulla gravida lorem feugiat justo elementum sodales. Phasellus id ex auctor sapien placerat tincidunt vel non felis. Sed accumsan ex commodo, hendrerit justo a, facilisis erat. Aliquam purus magna, placerat vitae metus in, accumsan vehicula risus. Nunc aliquet turpis in rhoncus pretium. Ut massa risus, aliquet a mollis non, semper at tortor. Vivamus lacus justo, luctus quis tincidunt non, luctus sed lorem. Nullam dignissim et quam elementum sodales. Donec ipsum libero, dignissim sed mi at, scelerisque porta quam. Nulla semper leo a ligula ullamcorper, et eleifend enim lobortis. Sed vulputate erat orci, sed molestie felis maximus sit amet. Quisque ultricies maximus finibus. Sed elementum condimentum maximus. Vivamus cursus libero et tellus mattis, ac pretium nulla bibendum. Duis lobortis scelerisque leo, nec egestas sem suscipit ut. Suspendisse metus diam, sagittis vitae pretium finibus, lacinia nec augue. Cras rhoncus non augue a rhoncus. Cras a nunc eget neque tristique consequat tincidunt id purus. Quisque fringilla enim tortor, et condimentum lacus tempor sed. Pellentesque congue ipsum at lacus iaculis, ac viverra mi gravida. Mauris nec gravida libero. Fusce accumsan risus est, et fermentum ex feugiat sed. Quisque ut lorem ac dolor aliquet tempus ut a tellus. Quisque sit amet faucibus leo. Nam porttitor commodo turpis non interdum. Sed porttitor elit enim. Vivamus fermentum, risus at cursus feugiat, arcu nulla bibendum mi, in bibendum ante enim nec turpis. Aliquam cursus, arcu vel rutrum ullamcorper, dolor diam blandit nulla, at iaculis mauris nibh sed justo. Mauris ut ligula malesuada est venenatis aliquet. Cras sit amet nunc consectetur, fringilla mauris et, convallis purus. In ligula nulla, ultricies quis est sed, porta volutpat urna. Phasellus in nunc at libero suscipit ullamcorper. Cras iaculis finibus suscipit. Ut id venenatis ligula. Proin a enim in mi laoreet interdum. Vivamus tristique tortor et justo fermentum venenatis. Morbi ac facilisis justo. Cras porttitor leo non fringilla lobortis. Praesent semper volutpat enim, eget finibus nulla accumsan id. Nunc vehicula non ipsum sit amet accumsan. Phasellus at porta tellus. Sed maximus pellentesque dapibus. Morbi ut orci at quam posuere sagittis.";
 
@@ -30,6 +30,7 @@ $(document).ready()
 function initialize()
 {
     cycleRandom = Math.random();
+    setNewFunctions();
 }
 
 function updateScreen()
@@ -38,12 +39,17 @@ function updateScreen()
 
     for(var a = 0; a < functionsToCall.length; a++)
     {
-        if(functionList[functionsToCall[a]][1] == true && cycles1 > 1)
+        if(functionList[functionsToCall[a]][0] == frameColor)
+        {
+            setNewFunctions(a);
+        }
+        if(functionList[functionsToCall[a]][1] == true && cycles1 > 0)
         {
             continue;
         } 
         functionList[functionsToCall[a]][0](screens[a]);
     }
+
 
     setTimeout(function()
     {
@@ -52,6 +58,8 @@ function updateScreen()
     }, 
     updateInterval);
 
+
+    // new cycle
     if(cycles1 > nextCycle)
     {
         setNewFunctions();
@@ -59,15 +67,24 @@ function updateScreen()
         cycles1 = 0;
         cycleRandom = Math.random();
         clearScreens();
+        hideScreens();
     }
 }
 
-function setNewFunctions()
+function setNewFunctions(id = -1)
 {
-    for(var a = 0; a < functionsToCall.length; a++)
+    if(id == -1)
     {
-        functionsToCall[a] = Math.floor(Math.random() * functionList.length);
+        for(var a = 0; a < functionsToCall.length; a++)
+        {
+            functionsToCall[a] = Math.floor(Math.random() * functionList.length);
+        }
     }
+    else
+    {
+        functionsToCall[id] = Math.floor(Math.random() * functionList.length);
+    }
+
 }
 
 function clearScreens()
@@ -76,6 +93,11 @@ function clearScreens()
     {
         $(screens[a] + "-child").html("");
     }
+}
+
+function hideScreens()
+{
+   $("#mainframe-info").css("display", "none");
 }
 
 function frameColor(currentScreen)
@@ -88,18 +110,28 @@ function frameColor(currentScreen)
 
 function showSphere(currentScreen)
 {
+    var widthClass = "";
+    var sphereCount = 2;
+
+    if(currentScreen == "#screen-3")
+    {
+        widthClass = "width-25";
+        sphereCount = 4;
+    }
+    else
+    {
+        widthClass = "width-50";
+        sphereCount = 2;
+    }
+
     var childDiv = $(currentScreen + "-child");
     childDiv.css("top", "0");
-    var sphere = "<img class='float-left width-50' src='img/" + wireSpheres[Math.floor(Math.random() * wireSpheres.length)] + "' />";
+    var sphere = "<img class='float-left padding-bottom-10 padding-top-10 " + widthClass + " ' src='img/" + wireSpheres[Math.floor(Math.random() * wireSpheres.length)] + "' style='" + "height: " + $(currentScreen).height() + "px;" + "' />";
 
-    childDiv.append($(sphere));
-    childDiv.append($(sphere));
-    // sphere.clone().prependTo(childDiv);
-    // sphere.clone().prependTo(childDiv);
-    // for(var a = childDiv.height(); a < currentScreen.height();)
-    // {
-    //     childDiv.append($(sphere));
-    // }
+    for(var a = 0; a < sphereCount; a++)
+    {
+        childDiv.append($(sphere));
+    }
 }
 
 function mainframeSectors(currentScreen)
