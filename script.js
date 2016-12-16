@@ -1,7 +1,7 @@
 $(document).ready()
 {
     // [[1]] = only once
-    var functionList = [[mainframeSectors, false], [frameColor, true], [showSphere, true]];
+    var functionList = [[mainframeSectors, false], [frameColor, true], [showSphere, true], [showIframe, true]];
     var functionsToCall = [0, 0, 0];
     var screens = ["#screen-1", "#screen-2", "#screen-3"];
 
@@ -14,9 +14,11 @@ $(document).ready()
     var sectorsBlue = 0;
     var sectorsYellow = 0;
     var sectorsCount = 1200;
+    var iframeCount = 0;
 
     var colors = ["lightcoral", "lightseagreen", "lightcyan", "white", "lightblue"];
     var wireSpheres = ["wire_sphere_1.gif", "wire_sphere_2.gif", "wire_sphere_3.gif", "wire_sphere_4.gif", "wire_sphere_5.gif", "wire_sphere_6.gif"];
+    var youtubeIds = ["idrRvLCq4Yc", "4XA7mBDGvnI", "7fHiNaexyDA", "HVnQJAlik_w", "Uxg49siSvu4"];
 
     var cycles1 = 0;
     var nextCycle = 1400;
@@ -43,7 +45,7 @@ function updateScreen()
         {
             setNewFunctions(a);
         }
-        if(functionList[functionsToCall[a]][1] == true && cycles1 > 1)
+        if(functionList[functionsToCall[a]][1] == true && cycles1 > 0)
         {
             continue;
         } 
@@ -99,6 +101,7 @@ function clearScreens()
 function hideScreens()
 {
    $("#mainframe-info").css("display", "none");
+   iframeCount = 0;
 }
 
 function frameColor(currentScreen)
@@ -111,7 +114,6 @@ function frameColor(currentScreen)
 
 function showSphere(currentScreen)
 {
-    console.log("sphere");
     var widthClass = "";
     var sphereCount = 2;
 
@@ -134,6 +136,17 @@ function showSphere(currentScreen)
     {
         childDiv.append($(sphere));
     }
+}
+
+function showIframe(currentScreen)
+{
+    iframeCount++;
+    var childDiv = $(currentScreen + "-child");
+    var iframe = "<iframe id='iframe' class='iframe overflow-hidden' src='https://www.youtube.com/embed/" + youtubeIds[Math.floor(Math.random() * youtubeIds.length)] + "?rel=0&enablejsapi=1&autoplay=1&controls=0&showinfo=0&loop=1&iv_load_policy=3' frameborder='0'></iframe>";
+    iframe = $(iframe);
+    iframe.attr("height", $(currentScreen).height());
+    iframe.attr("width", $(currentScreen).width());
+    childDiv.append(iframe);
 }
 
 function mainframeSectors(currentScreen)
